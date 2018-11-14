@@ -18,8 +18,15 @@ public class Max {
         return first > second ? first : second;
     }
 
+    /**
+     * Сравнивает три числа
+     * @param first первое число
+     * @param second второе число
+     * @param third третье число
+     * @return возвращает максимум из трех чисел.
+     */
     public int max(int first, int second, int third) {
-        return max(first,max(second,third));
+        return max(first, max(second, third));
 
     }
 }

@@ -28,7 +28,7 @@ public class MaxTest {
     @Test
     public void whenThreeCounts() {
         Max maxim = new Max();
-        int result = maxim.max(1, 2,4);
+        int result = maxim.max(1, 2, 4);
         assertThat(result, is(4));
     }
 }
