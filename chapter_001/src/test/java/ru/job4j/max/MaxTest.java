@@ -21,4 +21,14 @@ public class MaxTest {
         int result = maxim.max(1, 2);
         assertThat(result, is(2));
     }
+
+    /**
+     * Test 2 constructor of max(), when 2nd more then 1st
+     */
+    @Test
+    public void whenThreeCounts() {
+        Max maxim = new Max();
+        int result = maxim.max(1, 2,4);
+        assertThat(result, is(4));
+    }
 }
