@@ -20,7 +20,7 @@ public class Board {
         for (int sizeHeight = 1; sizeHeight <= height; sizeHeight++) {
             for (int sizeWidth = 1; sizeWidth <= width; sizeWidth++) {
 
-                if ((sizeHeight+sizeWidth) % 2 == 0) {
+                if ((sizeHeight + sizeWidth) % 2 == 0) {
                     screen.append("x");
                 } else {
                     screen.append(" ");
