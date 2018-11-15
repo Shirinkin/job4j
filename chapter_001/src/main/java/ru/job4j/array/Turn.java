@@ -13,7 +13,7 @@ public class Turn {
      * @return - перевернутый массив
      */
     public int[] back(int[] array) {
-        int countOfIteration = Math.round(array.length / 2);
+        int countOfIteration = array.length / 2;
         for (int index = 0; index < countOfIteration; index++) {
             int temp1 = array[index];
             int temp2 = array[array.length - index - 1];
