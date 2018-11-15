@@ -17,4 +17,13 @@ public class ArrayDuplicateTest {
         String [] result = arrayDuplicate.remove(input);
         assertThat(result, arrayContainingInAnyOrder(except));
     }
+
+    @Test
+    public void whenRemoveDuplicatesThenArrayWithoutDuplicateSecondTry() {
+        ArrayDuplicate dupl = new ArrayDuplicate();
+        String[] input = new String[] {"1", "1", "2", "3", "4", "4", "5", "5"};
+        String[] result = new String[] {"1", "2", "3", "4", "5"};
+        input = dupl.remove(input);
+        assertThat(input, arrayContainingInAnyOrder(result));
+    }
 }

@@ -1,22 +1,29 @@
 package ru.job4j.array;
 
+import java.util.Arrays;
+
 /**
  * Удаляет дубликаты из массива
  */
 public class ArrayDuplicate {
 
-    public String[] remove (String [] array){
-        int duplicate = array.length;
-        for (int out = 0; out < duplicate; out++){
-            String temp = array[out];
-            for (int in = 0; in < duplicate; in++){
-                if (temp.equals(array[in])){
-                    array[in] = array[duplicate - 1];
-                    duplicate--;
+    /**
+     * Удаление одинаовых строк в массиве
+     * @param array - массив строк
+     * @return массив строк с уделенными одинаковыми значениями
+     */
+    String[] remove(String[] array) {
+        //кол-во одинаковых записей
+        int last = array.length;
+        for (int i = 0; i < last; i++) {
+            for (int j = i + 1; j < last; j++) {
+                if (array[i].equals(array[j])) {
+                    array[j] = array[last - 1];
+                    last--;
+                    j--;
                 }
             }
         }
-        return array;
+        return Arrays.copyOf(array, last);
     }
-
 }
