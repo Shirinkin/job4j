@@ -20,7 +20,6 @@ public class Square {
             for (int i = 0; i < rst.length; i++) {
                 rst[i] = (int) Math.pow(i + 1, 2);
             }
-
         return rst;
     }
 }
