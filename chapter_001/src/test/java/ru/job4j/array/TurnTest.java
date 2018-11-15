@@ -23,6 +23,7 @@ public class TurnTest {
         int[] result = turner.back(input);
         int[] expect = new int[] {2, 6, 1, 4};
         assertThat(result, is(expect));
+
     }
 
     /**

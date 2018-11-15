@@ -16,9 +16,9 @@ public class Turn {
         int countOfIteration = Math.round(array.length / 2);
         for (int index = 0; index < countOfIteration; index++) {
             int temp1 = array[index];
-            int temp2 = array[array.length - index -1];
+            int temp2 = array[array.length - index - 1];
             array[index] = temp2;
-            array[array.length - index -1] = temp1;
+            array[array.length - index - 1] = temp1;
         }
         return array;
     }
