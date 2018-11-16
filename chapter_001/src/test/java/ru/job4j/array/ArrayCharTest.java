@@ -10,9 +10,7 @@ import static org.junit.Assert.assertThat;
  */
 public class ArrayCharTest {
 
-    /**
-     * Если есть совпадения
-     */
+
     @Test
     public void whenStartWithPrefixThenTrue() {
         ArrayChar word = new ArrayChar("Hello");
@@ -20,9 +18,6 @@ public class ArrayCharTest {
         assertThat(result, is(true));
     }
 
-    /**
-     * Если совпадений нет
-     */
     @Test
     public void whenNotStartWithPrefixThenFalse() {
         ArrayChar word = new ArrayChar("Hello");
@@ -30,9 +25,7 @@ public class ArrayCharTest {
         assertThat(result, is(false));
     }
 
-    /**
-     * Точное совпадение слова
-     */
+
     @Test
     public void whenStartWithPrefixAndConditionsAreEquals() {
         ArrayChar word = new ArrayChar("Hello");
