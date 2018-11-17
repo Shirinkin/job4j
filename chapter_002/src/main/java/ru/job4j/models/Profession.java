@@ -7,8 +7,8 @@ package ru.job4j.models;
  */
 public class Profession {
 
-    public String name;
-    public String occupation;
+    private String name;
+    private String occupation;
 
     public String getName() {
         return this.name;

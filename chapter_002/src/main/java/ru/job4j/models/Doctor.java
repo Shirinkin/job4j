@@ -5,14 +5,18 @@ package ru.job4j.models;
  * @version $Id$
  * @since 0.1
  */
-public class Doctor  extends Profession{
+public class Doctor  extends Profession {
 
     /**
      * Лечить пациента
+     *
      * @param patient
      * @return диагноз
      */
-    public Diagn toHeal(Patient patient){
+    public Diagn toHeal(Patient patient) {
         return null;
     }
+
 }
+
+

@@ -7,7 +7,7 @@ package ru.job4j.models;
  */
 public class Engineer extends Profession {
 
-    public Project toBuild(House house){
+    public Project toBuild(House house) {
         return null;
     }
 }
