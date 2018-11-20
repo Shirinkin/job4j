@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -91,15 +92,24 @@ public class Tracker {
      * @param name - имя заявки
      * @return
      */
-    public Item findByName(String name) {
-        Item result = null;
-        for (Item item : items) {
-            if (item.getName().equals(name) && item != null) {
-                result = item;
-                break;
+    public Item[] findByName(String name) {
+        Item[] result = null;
+        int count = 0;
+        for (int i = 0; i < this.position; i++) {
+            if (name.equals(items[i].getName())) {
+                count++;
             }
         }
-
+        if (count > 0) {
+            result = new Item[count];
+            count = 0;
+            for (int i = 0; i < this.position; i++) {
+                if (name.equals(items[i].getName())) {
+                    result[count] = items[i];
+                    count++;
+                }
+            }
+        }
         return result;
     }
 

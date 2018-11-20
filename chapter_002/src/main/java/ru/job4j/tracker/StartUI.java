@@ -94,10 +94,8 @@ public class StartUI {
     private void showItemByName() {
         System.out.println("------------ Поиск по имени заявки --------------");
         String name = this.input.ask("Введите имя заявки :");
-        Item item = this.tracker.findByName(name);
-        System.out.println("-------------- заявка с именем : " + item.getName() + "-------------");
-        System.out.println("---ID: " + item.getId() + " --- ОПИСАНИЕ --- " + item.getDescription()
-                + " --- ДАТА ---" +item.getCreated()+"\n");
+        Item[] item = this.tracker.findByName(name);
+        System.out.println(item);
     }
 
     /**
