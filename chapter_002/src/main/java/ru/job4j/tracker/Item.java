@@ -21,6 +21,11 @@ public class Item {
         this.created = created;
     }
 
+    public Item(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public String getId() {
         return this.id;
     }
