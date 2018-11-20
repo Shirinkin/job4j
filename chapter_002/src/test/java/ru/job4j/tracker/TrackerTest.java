@@ -61,4 +61,15 @@ public class TrackerTest {
         assertThat(tracker.getAll()[0], is(item2));
     }
 
+    @Test
+    public void whenDeleteItemWithId458ItemThenFalse() {
+        Tracker tracker = new Tracker();
+        Item item1 = new Item("test1", "testDescription", 123L);
+        tracker.add(item1);
+        Item item2 = new Item("test123", "testDescription23", 1234L);
+        tracker.add(item2);
+        boolean result = tracker.delete("458");
+        assertThat(result, is(false));
+    }
+
 }

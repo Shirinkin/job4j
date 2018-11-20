@@ -48,10 +48,10 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{"
-                + "id='" + id + '\''
-                + ", name='" + name + '\''
-                + ", description='" + description + '\''
-                + ", created=" + created + '}';
+        return "Заявка{"
+                + "id='" + this.id + '\''
+                + ", name='" + this.name + '\''
+                + ", description='" + this.description + '\''
+                + ", created=" + this.created + '}';
     }
 }

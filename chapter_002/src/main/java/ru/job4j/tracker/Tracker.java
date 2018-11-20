@@ -63,28 +63,34 @@ public class Tracker {
      * @param id - номер заявки
      * @param item заявка
      */
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
+        boolean result = false;
         item.setId(id);
         for (int index = 0; index != this.position; index++) {
             if (this.items[index].getId().equals(id) && id != null) {
                 this.items[index] = item;
+                result = true;
                 break;
             }
         }
+        return result;
     }
 
     /**
      * Удаление заявки
      * @param id
      */
-    public void delete(String id) {
+    public boolean delete(String id) {
+        boolean result = false;
         for (int index = 0; index != position; index++) {
             if (id != null && this.items[index].getId().equals(id)) {
                System.arraycopy(this.items, index + 1, this.items, index, this.items.length - index - 1);
                 position--;
+                result = true;
                 break;
            }
        }
+       return result;
     }
 
     /**
