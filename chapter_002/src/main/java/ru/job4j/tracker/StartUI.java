@@ -143,7 +143,7 @@ public class StartUI {
         Item item = this.tracker.findById(number);
         System.out.println("-------------- заявка с getId : " + item.getId() + "-------------");
         System.out.println("---НАЗВАНИЕ: " + item.getName() + " --- ОПИСАНИЕ --- " + item.getDescription()
-                + " --- ДАТА --- " +item.getCreated() + "\n");
+                + " --- ДАТА --- " + item.getCreated() + "\n");
     }
 
     /**

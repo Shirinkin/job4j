@@ -66,7 +66,7 @@ public class Tracker {
     public void replace(String id, Item item) {
         item.setId(id);
         for (int index = 0; index != this.position; index++) {
-            if(this.items[index].getId().equals(id) && id != null) {
+            if (this.items[index].getId().equals(id) && id != null) {
                 this.items[index] = item;
                 break;
             }
@@ -80,7 +80,7 @@ public class Tracker {
     public void delete(String id) {
         for (int index = 0; index != position; index++) {
             if (id != null && this.items[index].getId().equals(id)) {
-               System.arraycopy(this.items, index+1, this.items, index, this.items.length - index - 1);
+               System.arraycopy(this.items, index + 1, this.items, index, this.items.length - index - 1);
                 position--;
                 break;
            }
@@ -93,24 +93,15 @@ public class Tracker {
      * @return
      */
     public Item[] findByName(String name) {
-        Item[] result = null;
-        int count = 0;
+        Item[] result = new Item[position];
+        int resultPos = 0;
         for (int i = 0; i < this.position; i++) {
-            if (name.equals(items[i].getName())) {
-                count++;
+            if (name.equals(items[i].getName()) && this.items[i] != null) {
+                result[resultPos] = this.items[i];
+                resultPos++;
             }
         }
-        if (count > 0) {
-            result = new Item[count];
-            count = 0;
-            for (int i = 0; i < this.position; i++) {
-                if (name.equals(items[i].getName())) {
-                    result[count] = items[i];
-                    count++;
-                }
-            }
-        }
-        return result;
+        return Arrays.copyOf(result, resultPos);
     }
 
     /**
