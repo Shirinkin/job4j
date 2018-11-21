@@ -150,19 +150,11 @@ public class StartUI {
     private void showItemByID() {
         System.out.println("------------ Поиск по номеру заявки --------------");
         String number = this.input.ask("Введите ID заявки :");
-        Item[] result = this.tracker.getAll();
-        if (result.length == 0) {
-            System.out.println(" В программе нет заявок!");
+        Item result = tracker.findById(number);
+        if (result == null) {
+            System.out.println("Нет такой заявки");
         } else {
-            for (int index = 0; index != result.length; index++) {
-                if (result[index].getId().equals(number)) {
-                    Item item = this.tracker.findById(number);
-                    System.out.println(item.toString());
-                    break;
-                } else {
-                    System.out.println("Нет такого айди!" + "\n");
-                }
-            }
+            System.out.println(result.toString());
         }
     }
 

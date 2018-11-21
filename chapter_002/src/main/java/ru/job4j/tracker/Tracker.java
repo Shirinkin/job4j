@@ -47,16 +47,16 @@ public class Tracker {
      * @param id
      * @return
      */
-    public Item findById(String id) {
-        Item result = null;
-        for (Item item: items) {
-            if (item.getId().equals(id) && item != null) {
-                result = item;
-                break;
+     public Item findById(String id) {
+            Item result = null;
+            for (int i = 0; i < position; i++) {
+                if (items[i].getId().equals(id)) {
+                    result = items[i];
+                    break;
+                }
             }
+            return result;
         }
-        return result;
-    }
 
     /**
      * Редактирование заявки
