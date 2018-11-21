@@ -68,7 +68,7 @@ public class StartUI {
      * Основной цикл программы.
      */
     public void init() {
-        Tracker tracker = new Tracker();
+
         MenuTracker menu = new MenuTracker(this.input,tracker);
         menu.fillActions();
         do {
@@ -101,6 +101,7 @@ public class StartUI {
     /**
      * Метод реализует поиск заявки по имени
      */
+    @Deprecated
     private void showItemByName() {
         System.out.println("------------ Поиск по имени заявки --------------");
         String name = this.input.ask("Введите имя заявки :");
@@ -113,6 +114,7 @@ public class StartUI {
     /**
      *Метод реализует редактирование заявки по айди
      */
+    @Deprecated
     private void editItem() {
         System.out.println("------------ Редактирование заявки --------------");
         String id = this.input.ask("Введите id заявки :");
@@ -131,6 +133,7 @@ public class StartUI {
     /**
      *Метод реализует удаление заявки по айди
      */
+    @Deprecated
     private void deleteItem() {
         System.out.println("------------ Удаление заявки --------------");
         String id = this.input.ask("Введите id заявки :");
@@ -145,6 +148,7 @@ public class StartUI {
     /**
      * Метод реализует добавлене новый заявки в хранилище.
      */
+    @Deprecated
     private void createItem() {
         System.out.println("------------ Добавление новой заявки --------------");
         String name = this.input.ask("Введите имя заявки :");
@@ -157,6 +161,7 @@ public class StartUI {
     /**
      * Метод реализует показ заявки по айди
      */
+    @Deprecated
     private void showItemByID() {
         System.out.println("------------ Поиск по номеру заявки --------------");
         String number = this.input.ask("Введите ID заявки :");
@@ -171,6 +176,7 @@ public class StartUI {
     /**
      * Метод реализует показ всех заявок
      */
+    @Deprecated
     private void showAllItems() {
         System.out.println("------------ Показаны все заявки --------------");
         Item[] item = this.tracker.getAll();
@@ -182,6 +188,7 @@ public class StartUI {
     /**
      * Показывает меню
      */
+    @Deprecated
     private void showMenu() {
         System.out.println("Меню.");
         System.out.println("0. Add new item");

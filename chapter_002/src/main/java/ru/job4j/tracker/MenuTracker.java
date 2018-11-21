@@ -14,6 +14,7 @@ public class MenuTracker {
 
 
     public void fillActions() {
+        System.out.println("Меню.");
         this.actions[0] = this.new AddItem();
         this.actions[1] = new MenuTracker.ShowItems();
         this.actions[2] = new EditItem();
@@ -120,7 +121,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return String.format("%s. %s", this.key(), "Add new item");
+            return String.format("%s. %s", this.key(), "Find items by name");
         }
     }
 
