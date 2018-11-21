@@ -1,12 +1,89 @@
 package ru.job4j.tracker;
 
 import org.hamcrest.Matcher;
+import org.hamcrest.core.Is;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 public class StartUITest {
+
+    // поле содержит дефолтный вывод в консоль.
+    private final PrintStream stdout = System.out;
+    // буфер для результата.
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    //Меню
+    private final String menu = new StringBuilder()
+            .append("Меню.")
+            .append(System.lineSeparator())
+            .append("0. Add new item")
+            .append(System.lineSeparator())
+            .append("1. Show all items")
+            .append(System.lineSeparator())
+            .append("2. Edit item")
+            .append(System.lineSeparator())
+            .append("3. Delete item")
+            .append(System.lineSeparator())
+            .append("4. Find item by Id")
+            .append(System.lineSeparator())
+            .append("5. Find items by name")
+            .append(System.lineSeparator())
+            .append("6. Exit Program")
+            .append(System.lineSeparator())
+            .toString();
+
+    @Before
+    public void loadOutput() {
+        System.out.println("execute before method");
+        System.setOut(new PrintStream(this.out));
+    }
+
+    @After
+    public void backOutput() {
+        System.setOut(this.stdout);
+        System.out.println("execute after method");
+    }
+
+    @Test
+    public void whenUserShowAllItemsThenTrackerShow() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("test name",  "test Descr"));
+        Input input = new StubInput(new String[]{"1","6"});
+        new StartUI(input, tracker).init();
+        assertThat(
+                new String(this.out.toByteArray()),
+                is (menu + "------------ Показаны все заявки --------------\r\n" + tracker.getAll()[0].toString() + "\r\n" + menu));
+    }
+
+    @Test
+    public void whenUserFindItemByIdThenTrackerShow() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("test name",  "test Descr"));
+        Input input = new StubInput(new String[]{"4",item.getId(),"6"});
+        new StartUI(input, tracker).init();
+        assertThat(
+                new String(this.out.toByteArray()),
+                is (menu + "------------ Поиск по номеру заявки --------------\r\n" + tracker.findById(item.getId()).toString() + "\r\n" + menu));
+    }
+
+    @Test
+    public void whenUserFindItemByNameThenTrackerShow() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("test name",  "test Descr"));
+        Item item2 = tracker.add(new Item("test name",  "test Descsdfr"));
+        Input input = new StubInput(new String[]{"5","test name","6"});
+        new StartUI(input, tracker).init();
+        Item[] result = tracker.findByName("test name");
+        assertThat(
+                new String(this.out.toByteArray()),
+                is (menu + "------------ Поиск по имени заявки --------------\r\n" + tracker.findByName("test name")[0].toString() + "\r\n" + tracker.findByName("test name")[1].toString() + "\r\n" + menu));
+    }
 
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
