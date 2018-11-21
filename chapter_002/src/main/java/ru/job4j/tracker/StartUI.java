@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -66,7 +68,15 @@ public class StartUI {
      * Основной цикл программы.
      */
     public void init() {
-        boolean exit = false;
+        Tracker tracker = new Tracker();
+        MenuTracker menu = new MenuTracker(this.input,tracker);
+        menu.fillActions();
+        do {
+            menu.show();
+            int key = Integer.valueOf(this.input.ask("Select:"));
+            menu.select(key);
+        } while(!"y".equals(this.input.ask("Exit? (y)")));
+        /*boolean exit = false;
         while (!exit) {
             this.showMenu();
             String answer = this.input.ask("Введите пункт меню : ");
@@ -85,7 +95,7 @@ public class StartUI {
             } else if (EXIT.equals(answer)) {
                 exit = true;
             }
-        }
+        }*/
     }
 
     /**
