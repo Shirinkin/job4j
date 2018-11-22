@@ -54,6 +54,8 @@ public class StartUI {
      */
     private final Tracker tracker;
 
+
+
     /**
      * Конструтор инициализирующий поля.
      * @param input ввод данных.
@@ -73,8 +75,8 @@ public class StartUI {
         menu.fillActions();
         do {
             menu.show();
-            int key = Integer.valueOf(this.input.ask("Select:"));
-            menu.select(key);
+            //int key = Integer.valueOf(this.input.ask("Select:"));
+            menu.select(input.ask("Select:", menu.getActionsId() ));
         } while(!"y".equals(this.input.ask("Exit? (y)")));
         /*boolean exit = false;
         while (!exit) {
@@ -205,6 +207,6 @@ public class StartUI {
      * @param args
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }

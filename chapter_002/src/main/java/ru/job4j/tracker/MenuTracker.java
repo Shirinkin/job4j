@@ -4,6 +4,7 @@ public class MenuTracker {
 
     private Input input;
     private Tracker tracker;
+
     private UserAction[] actions = new UserAction[7];
 
     public MenuTracker(Input input, Tracker tracker) {
@@ -11,7 +12,13 @@ public class MenuTracker {
         this.tracker = tracker;
     }
 
-
+    public int[] getActionsId(){
+        int[] range = new int[7];
+        for (int index = 0; index != range.length; index++) {
+            range[index] = index;
+        }
+        return range;
+    }
 
     public void fillActions() {
         System.out.println("Меню.");
