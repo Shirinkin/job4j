@@ -1,10 +1,5 @@
 package ru.job4j.tracker;
 
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 /**
  * @version $Id$
  * @since 0.1
@@ -207,6 +202,6 @@ public class StartUI {
      * @param args
      */
     public static void main(String[] args) {
-        new StartUI(new ValidateInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker()).init();
     }
 }
