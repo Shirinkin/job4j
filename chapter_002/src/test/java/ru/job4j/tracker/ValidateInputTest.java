@@ -11,8 +11,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 /**
- * //TODO add comments.
- *
  * @author Misha shirinkin
  * @version $Id$
  * @since 0.1
