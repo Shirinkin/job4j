@@ -157,15 +157,12 @@ class EditItem extends BaseAction {
     public void execute(Input input, Tracker tracker) {
         System.out.println("------------ Редактирование заявки --------------");
         String id = input.ask("Введите id заявки :");
-        Item item = new Item(null, null);
-        if (tracker.replace(id, item)) {
-            String name = input.ask("Отредактируйте имя заявки :");
-            String desc = input.ask("Отредактируйте описание заявки :");
-            item = new Item(name, desc);
-            tracker.replace(id, item);
-            System.out.println("------------ заявка с getId : " + item.getId() + " успешно отредактирована" + "\n");
-        } else {
-            System.out.println("Нет такой заявки!" + "\n");
-        }
+        String name = input.ask("Отредактируйте имя заявки :");
+        String desc = input.ask("Отредактируйте описание заявки :");
+        tracker.replace(id,new Item(name, desc));
+        System.out.println("------------ заявка с getId : " + id + " успешно отредактирована" + "\n");
     }
+
 }
+
+
