@@ -15,59 +15,35 @@ public class Bishop extends Figure {
         super(position);
     }
 
-    /**
-     * Method way.
-     * Calculates the way from source to dest.
-     *
-     * @param source type Cell.
-     * @param dest   type Cell.
-     * @return steps type Cell[].
-     */
+
+    public Cell position() {
+        return this.position;
+    }
+
     @Override
     public Cell[] way(Cell source, Cell dest) {
         if (!isDiagonal(source, dest)) {
-            throw new ImposiibleMoveException("Impossible move");
+            throw new ImposiibleMoveException("Impossible move, bishop can move only diagonal");
         }
-        Cell[] steps = new Cell[Math.abs(dest.x - source.x)];
-        int deltaX = Integer.compare(dest.x, source.x);
-        int deltaY = Integer.compare(dest.y, source.y);
-        int stepX = 0;
-        int stepY = 0;
-        for (int i = 1; i <= steps.length; i++) {
-            stepX = source.x + (deltaX * i);
-            stepY = source.y + (deltaY * i);
-            steps[i - 1] = findCell(stepX, stepY);
+        int deltaX = source.x - dest.x;
+        int deltaY = source.y - dest.y;
+        Cell[] steps = new Cell[Math.abs(deltaX)];
+        int stepX = deltaX > 0 ? 1 : -1;
+        int stepY = deltaY > 0 ? 1 : -1;
+        for (int index = 0; index < steps.length; index++) {
+            int x = source.x - stepX * (index + 1);
+            int y = source.y - stepY * (index + 1);
+            steps[index] = Cell.values()[x * 8 + y];
         }
         return steps;
     }
 
-    /**
-     * Method isDiagonal.
-     * Checks if the way is diagonal.
-     *
-     * @param source type Cell.
-     * @param dest   type Cell.
-     * @return result type boolean.
-     */
-    private boolean isDiagonal(Cell source, Cell dest) {
-        boolean result = false;
-        if (Math.abs((dest.x - source.x)) == Math.abs((dest.y - source.y))) {
-            result = true;
-        }
-        return result;
-    }
-
-    /**
-     * Method copy.
-     * Copies the figure to its dest.
-     *
-     * @param dest type Cell.
-     * @return figure type Figure.
-     */
     @Override
     public Figure copy(Cell dest) {
         return new Bishop(dest);
     }
 
-
+    public boolean isDiagonal(Cell source, Cell dest) {
+        return Math.abs(dest.x - source.x) == Math.abs(dest.y - source.y);
+    }
 }

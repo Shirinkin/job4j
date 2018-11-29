@@ -30,15 +30,5 @@ public abstract class Figure {
      */
     public abstract Figure copy(Cell dest);
 
-    protected Cell findCell(int x,int y) {
-        Cell result = Cell.A1;
-        for (Cell cell : Cell.values()){
-            if (cell.x == x && cell.y == y) {
-                result = cell;
-                break;
-            }
-        }
-        return result;
-    }
 
 }
