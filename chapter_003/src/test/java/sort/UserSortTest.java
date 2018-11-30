@@ -31,12 +31,14 @@ public class UserSortTest {
         UserSort sorted = new UserSort();
         List<User> tempList = new ArrayList<>();
         User user1 = new User(5, "Misha");
-        User user2 = new User(1, "Adel");
-        User user3 = new User(150, "Adel");
+        User user2 = new User(5, "Adel");
+        User user3 = new User(1, "Adel");
         tempList.add(user1);
         tempList.add(user2);
         tempList.add(user3);
+        System.out.println(tempList);
         Set<User> result = sorted.sort(tempList);
-        assertThat(result.iterator().next(), is(user2));
+        System.out.println(result);
+        assertThat(result.iterator().next(), is(user3));
     }
 }
