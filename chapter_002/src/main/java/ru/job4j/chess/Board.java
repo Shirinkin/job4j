@@ -19,27 +19,23 @@ public class Board {
         this.figures[this.index++] = figure;
     }
 
-    public boolean move(Cell source, Cell dest) {
+    public boolean move(Cell source, Cell dest) throws FigureNotFoundException, ImposiibleMoveException, OcuupiedWayException {
         boolean result = false;
         int index = this.findBy(source);
-        if (this.findBy(source) == -1) {
-            throw new FigureNotFoundException("Figure not found");
+        if (index == -1) {
+            throw new FigureNotFoundException("no figure");
         }
-        Cell[] steps = this.figures[index].way(source, dest);
-        if (steps.length == 0 || !(steps[steps.length - 1].equals(dest))) {
-            throw new ImposiibleMoveException("Impossible move");
-        }
-        if (!this.figures[index].getClass().toString().contains("Knight")) {
-            for (Cell cell : steps) {
-                if (findBy(cell) != -1) {
-                    throw new OcuupiedWayException("Figure on way " + cell);
-                }
+        Cell[] steps = figures[index].way(source, dest);
+        for (Cell cell : steps) {
+            index = this.findBy(cell);
+            if (index != -1) {
+                throw new OcuupiedWayException("NO WAY");
             }
-        } else if (findBy(dest) != -1) {
-            throw new OcuupiedWayException("Figure on way " + dest);
         }
-        this.figures[index] = this.figures[index].copy(dest);
-        result = true;
+        if (steps.length > 0) {
+            this.figures[index] = this.figures[index].copy(dest);
+            result = true;
+        }
         return result;
     }
 
