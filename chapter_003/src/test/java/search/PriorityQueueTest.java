@@ -14,9 +14,7 @@ public class PriorityQueueTest {
         queue.put(new Task("middle", 3));
         queue.put(new Task("lowest", 8));
         queue.put(new Task("higher", 1));
-        queue.getAll();
         Task result = queue.take();
-
         assertThat(result.getDesc(),is("higher"));
     }
 
