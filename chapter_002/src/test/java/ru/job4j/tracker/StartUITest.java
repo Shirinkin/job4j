@@ -54,22 +54,22 @@ public class StartUITest {
     public void whenUserShowAllItemsThenTrackerShow() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name",  "test Descr"));
-        Input input = new StubInput(new String[]{"1","y"});
+        Input input = new StubInput(new String[]{"1", "y"});
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
-                is (menu + "------------ Показаны все заявки --------------\r\n" + tracker.getAll()[0].toString() + "\r\n"));
+                is(menu + "------------ Показаны все заявки --------------\r\n" + tracker.getAll()[0].toString() + "\r\n"));
     }
 
     @Test
     public void whenUserFindItemByIdThenTrackerShow() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name",  "test Descr"));
-        Input input = new StubInput(new String[]{"4",item.getId(),"y"});
+        Input input = new StubInput(new String[]{"4", item.getId(), "y"});
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
-                is (menu + "------------ Поиск по номеру заявки --------------\r\n" + tracker.findById(item.getId()).toString() + "\r\n"));
+                is(menu + "------------ Поиск по номеру заявки --------------\r\n" + tracker.findById(item.getId()).toString() + "\r\n"));
     }
 
     @Test
@@ -77,12 +77,12 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name",  "test Descr"));
         Item item2 = tracker.add(new Item("test name",  "test Descsdfr"));
-        Input input = new StubInput(new String[]{"5","test name","y"});
+        Input input = new StubInput(new String[]{"5", "test name", "y"});
         new StartUI(input, tracker).init();
         Item[] result = tracker.findByName("test name");
         assertThat(
                 new String(this.out.toByteArray()),
-                is (menu + "------------ Поиск по имени заявки --------------\r\n" + tracker.findByName("test name")[0].toString() + "\r\n" + tracker.findByName("test name")[1].toString() + "\r\n"));
+                is(menu + "------------ Поиск по имени заявки --------------\r\n" + tracker.findByName("test name")[0].toString() + "\r\n" + tracker.findByName("test name")[1].toString() + "\r\n"));
     }
 
     @Test

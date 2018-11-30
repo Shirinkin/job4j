@@ -54,7 +54,7 @@ public class PaintTest {
         new Paint().draw(new Triangle());
         assertThat(
                 new String(this.out.toByteArray()),
-                is(  new StringBuilder()
+                is(new StringBuilder()
                         .append("   +   ")
                         .append("  + +  ")
                         .append(" +   + ")

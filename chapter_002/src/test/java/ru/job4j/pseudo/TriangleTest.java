@@ -12,7 +12,7 @@ public class TriangleTest {
         Triangle triangle = new Triangle();
         assertThat(
                 triangle.draw(),
-                is(  new StringBuilder()
+                is(new StringBuilder()
                         .append("   +   ")
                         .append("  + +  ")
                         .append(" +   + ")
