@@ -41,7 +41,7 @@ public class ValidateInputTest {
         assertThat(
                 this.mem.toString(),
                 is(
-                        String.format("ERROR. Select Key from Menu\r\n")
+                        String.format("ERROR. Select Key from Menu")
                 )
         );
     }

@@ -60,7 +60,7 @@ public class StartUITest {
         Item item1 = tracker.getAll().get(0);
         assertThat(
                 new String(this.out.toByteArray()),
-                is(menu + "------------ Показаны все заявки --------------\r\n" + item1 + "\r\n"));
+                is(menu + "------------ Показаны все заявки --------------" + item1 + "\r\n"));
     }
 
     @Test
@@ -71,7 +71,7 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
-                is(menu + "------------ Поиск по номеру заявки --------------\r\n" + tracker.findById(item.getId()).toString() + "\r\n"));
+                is(menu + "------------ Поиск по номеру заявки --------------" + tracker.findById(item.getId()).toString()));
     }
 
     @Test
@@ -84,7 +84,7 @@ public class StartUITest {
         List<Item> result = tracker.findByName("test name");
         assertThat(
                 new String(this.out.toByteArray()),
-                is(menu + "------------ Поиск по имени заявки --------------\r\n" + item.toString() + "\r\n" + item2.toString() + "\r\n"));
+                is(menu + "------------ Поиск по имени заявки --------------" + item.toString() + item2.toString()));
     }
 
     @Test
