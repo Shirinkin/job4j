@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public class UserSortTest {
 
     @Test
-    public void WhenSortByName() {
+    public void whenSortByName() {
         UserSort sorted = new UserSort();
         List<User> tempList = new ArrayList<>();
         User user1 = new User(5, "Misha");
@@ -27,7 +27,7 @@ public class UserSortTest {
     }
 
     @Test
-    public void WhenSortByAge() {
+    public void whenSortByAge() {
         UserSort sorted = new UserSort();
         List<User> tempList = new ArrayList<>();
         User user1 = new User(5, "Misha");
@@ -43,7 +43,7 @@ public class UserSortTest {
     }
 
     @Test
-    public void WhenSortByNameLength() {
+    public void whenSortByNameLength() {
         UserSort sorted = new UserSort();
         List<User> tempList = new ArrayList<>();
         User user1 = new User(5, "Misha");
@@ -59,7 +59,7 @@ public class UserSortTest {
     }
 
     @Test
-    public void WhenSortByAllFields() {
+    public void whenSortByAllFields() {
         UserSort sorted = new UserSort();
         List<User> tempList = new ArrayList<>();
         User user1 = new User(5, "Misha");

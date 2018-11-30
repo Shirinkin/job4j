@@ -6,11 +6,11 @@ import java.util.*;
 
 public class UserSort {
 
-    public Set<User> sort (List<User> list) {
+    public Set<User> sort(List<User> list) {
         return new TreeSet<>(list);
     }
 
-    public List<User> sortByNameLength (List<User> list) {
+    public List<User> sortByNameLength(List<User> list) {
         list.sort(new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
@@ -22,12 +22,12 @@ public class UserSort {
         return list;
     }
 
-    public List<User> sortByAllFields (List<User> list) {
+    public List<User> sortByAllFields(List<User> list) {
         list.sort(new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
                 final int rs = o1.getName().compareTo(o2.getName());
-                return rs != 0 ? rs : o1.getAge().compareTo(o2.getAge()) ;
+                return rs != 0 ? rs : o1.getAge().compareTo(o2.getAge());
             }
         });
         return list;

@@ -18,7 +18,7 @@ public class PriorityQueue {
            }
            count++;
        }
-       tasks.add(count,task);
+       tasks.add(count, task);
     }
 
     public Task take() {

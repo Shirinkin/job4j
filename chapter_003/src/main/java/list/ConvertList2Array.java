@@ -14,7 +14,7 @@ public class ConvertList2Array {
      */
     public int[][] toArray(List<Integer> list, int rows) {
 
-        int cells = (int) Math.ceil((float)list.size() / rows);
+        int cells = (int) Math.ceil((float) list.size() / rows);
         int[][] array = new int[rows][cells];
         int index = 0;
         for (int out = 0; out < rows; out++) {
@@ -28,7 +28,7 @@ public class ConvertList2Array {
         return array;
     }
 
-    public List<Integer> convert (List<int[]> list) {
+    public List<Integer> convert(List<int[]> list) {
         List<Integer> result = new ArrayList<>();
         for (int[] ints : list) {
             for (int intas : ints) {
