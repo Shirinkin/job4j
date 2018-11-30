@@ -11,10 +11,10 @@ import static org.junit.Assert.assertThat;
 public class ArrayDuplicateTest {
     @Test
     public void whenRemoveDuplicatesThenArrayWithoutDuplicate() {
-        String [] input = {"mike","mike","lol"};
-        String [] except = {"mike", "lol"};
+        String[] input = {"mike", "mike", "lol"};
+        String[] except = {"mike", "lol"};
         ArrayDuplicate arrayDuplicate = new ArrayDuplicate();
-        String [] result = arrayDuplicate.remove(input);
+        String[] result = arrayDuplicate.remove(input);
         assertThat(result, arrayContainingInAnyOrder(except));
     }
 

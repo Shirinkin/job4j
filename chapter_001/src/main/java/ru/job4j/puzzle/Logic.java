@@ -12,24 +12,24 @@ import ru.job4j.puzzle.figures.Figure;
 public class Logic {
 
     private final int size;
-    private final Figure [] figures;
+    private final Figure[] figures;
     private int index = 0;
 
-    public Logic (int size) {
+    public Logic(int size) {
         this.size = size;
         this.figures = new Figure[size * size];
     }
 
-    public void add(Figure figure){
+    public void add(Figure figure) {
         this.figures[this.index++] = figure;
     }
 
-    public boolean move(Cell source,Cell dest){
+    public boolean move(Cell source, Cell dest) {
         boolean rst = false;
         int index = this.findBy(source);
         if (index != -1) {
-            Cell[] steps = this.figures[index].way(source,dest);
-            if (this.isFree(steps)){
+            Cell[] steps = this.figures[index].way(source, dest);
+            if (this.isFree(steps)) {
                 rst = true;
                 this.figures[index] = this.figures[index].copy(dest);
             }
@@ -37,10 +37,10 @@ public class Logic {
         return rst;
     }
 
-    public boolean isFree(Cell ... cells){
-        boolean result = cells.length >0;
-        for(Cell cell : cells){
-            if (this.findBy(cell) != -1){
+    public boolean isFree(Cell ... cells) {
+        boolean result = cells.length > 0;
+        for (Cell cell : cells) {
+            if (this.findBy(cell) != -1) {
                 result = false;
                 break;
             }
@@ -67,20 +67,20 @@ public class Logic {
     }
 
     public boolean isWin() {
-        int[][] table = this.convert();//объявляем таблицу
-        boolean result = false;//Изначально выигрышный результат = ЛОЖЬ
-        for (int out = 0; out != table.length; out++) {//Входим в цикл по строкам
-            int vertical = 0;//Сопадения по вертикали
-            int horizontal = 0;//совпадения по горизонтали
-            for (int in = 0; in != table.length; in++) {//Входим в цикл по столбцам
+        int[][] table = this.convert(); //объявляем таблицу
+        boolean result = false; //Изначально выигрышный результат = ЛОЖЬ
+        for (int out = 0; out != table.length; out++) { //Входим в цикл по строкам
+            int vertical = 0; //Сопадения по вертикали
+            int horizontal = 0; //совпадения по горизонтали
+            for (int in = 0; in != table.length; in++) { //Входим в цикл по столбцам
                 if (table[out][in] == 1) {
-                    horizontal++;//Прибавляем к совпадениям по горизонтали один, если верно
+                    horizontal++; //Прибавляем к совпадениям по горизонтали один, если верно
                 }
-                if (table[in][out] == 1) {//Прибавляем к совпадениям по вертикали один, если верно
+                if (table[in][out] == 1) { //Прибавляем к совпадениям по вертикали один, если верно
                     vertical++;
                 }
             }
-            if (horizontal == table.length || vertical == table.length){//Если совпадения равны размерности таблицы, то Вы выиграли
+            if (horizontal == table.length || vertical == table.length) { //Если совпадения равны размерности таблицы, то Вы выиграли
                 result = true;
                 break;
             }
