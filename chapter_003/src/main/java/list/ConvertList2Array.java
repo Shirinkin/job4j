@@ -30,10 +30,9 @@ public class ConvertList2Array {
 
     public List<Integer> convert (List<int[]> list) {
         List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            int[] tempArray = list.get(i);
-            for (int ints : tempArray) {
-                result.add(ints);
+        for (int[] ints : list) {
+            for (int intas : ints) {
+                result.add(intas);
             }
         }
         return result;
