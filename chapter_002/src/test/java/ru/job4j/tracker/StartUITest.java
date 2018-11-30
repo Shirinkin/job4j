@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -56,9 +57,10 @@ public class StartUITest {
         Item item = tracker.add(new Item("test name",  "test Descr"));
         Input input = new StubInput(new String[]{"1", "y"});
         new StartUI(input, tracker).init();
+        Item item1 = tracker.getAll().get(0);
         assertThat(
                 new String(this.out.toByteArray()),
-                is(menu + "------------ Показаны все заявки --------------\r\n" + tracker.getAll()[0].toString() + "\r\n"));
+                is(menu + "------------ Показаны все заявки --------------\r\n" + item1 + "\r\n"));
     }
 
     @Test
@@ -79,10 +81,10 @@ public class StartUITest {
         Item item2 = tracker.add(new Item("test name",  "test Descsdfr"));
         Input input = new StubInput(new String[]{"5", "test name", "y"});
         new StartUI(input, tracker).init();
-        Item[] result = tracker.findByName("test name");
+        List<Item> result = tracker.findByName("test name");
         assertThat(
                 new String(this.out.toByteArray()),
-                is(menu + "------------ Поиск по имени заявки --------------\r\n" + tracker.findByName("test name")[0].toString() + "\r\n" + tracker.findByName("test name")[1].toString() + "\r\n"));
+                is(menu + "------------ Поиск по имени заявки --------------\r\n" + item.toString() + "\r\n" + item2.toString() + "\r\n"));
     }
 
     @Test
@@ -90,7 +92,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();     // создаём Tracker
         Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});   //создаём StubInput с последовательностью действий
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
-        assertThat(tracker.getAll()[0].getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
+        assertThat(tracker.getAll().get(0).getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
 
     @Test
@@ -117,6 +119,6 @@ public class StartUITest {
        Item item3 = tracker.add(new Item("test", "de54564sc"));
        Input input = new StubInput(new String[]{"3", item2.getId(), "y"});
        new StartUI(input, tracker).init();
-       assertThat(tracker.getAll()[1].getName(), is("test"));
+       assertThat(tracker.getAll().get(1).getName(), is("test"));
           }
 }

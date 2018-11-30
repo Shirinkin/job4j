@@ -7,7 +7,6 @@ public class MenuTracker {
 
     private Input input;
     private Tracker tracker;
-    private int position = 0;
     private List<UserAction> actions = new ArrayList<>();
 
     public MenuTracker(Input input, Tracker tracker) {
@@ -25,13 +24,13 @@ public class MenuTracker {
 
     public void fillActions() {
         System.out.println("Меню.");
-        this.actions.add(position++, this.new AddItem(0, "Add new item"));
-        this.actions.add(position++, new ShowItems(1, "Show all items"));
-        this.actions.add(position++, new EditItem(2, "Edit item"));
-        this.actions.add(position++, this.new DeleteItem(3, "Delete item"));
-        this.actions.add(position++, this.new FindItemByID(4, "Find item by Id"));
-        this.actions.add(position++, this.new FindItemByName(5, "Find items by name"));
-        this.actions.add(position++, this.new ExitProgram(6, "Exit Program"));
+        this.actions.add(this.new AddItem(0, "Add new item"));
+        this.actions.add(new ShowItems(1, "Show all items"));
+        this.actions.add(new EditItem(2, "Edit item"));
+        this.actions.add(this.new DeleteItem(3, "Delete item"));
+        this.actions.add(this.new FindItemByID(4, "Find item by Id"));
+        this.actions.add(this.new FindItemByName(5, "Find items by name"));
+        this.actions.add(this.new ExitProgram(6, "Exit Program"));
     }
 
     public void select(int key) {
@@ -107,9 +106,9 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Поиск по имени заявки --------------");
             String name = input.ask("Введите имя заявки :");
-            Item[] item = tracker.findByName(name);
-            for (int index = 0; index != item.length; index++) {
-                System.out.println(item[index].toString());
+            List<Item> result = tracker.findByName(name);
+            for (int index = 0; index != result.size(); index++) {
+                System.out.println(result.get(index).toString());
             }
         }
     }

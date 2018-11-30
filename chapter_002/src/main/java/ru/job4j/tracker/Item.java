@@ -52,6 +52,6 @@ public class Item {
                 + "id='" + this.id + '\''
                 + ", name='" + this.name + '\''
                 + ", description='" + this.description + '\''
-                + ", created=" + this.created + '}';
+                + ", created=" + this.created + "}";
     }
 }

@@ -15,10 +15,6 @@ public class Tracker {
      */
     private final List<Item> items = new ArrayList<>();
 
-    /**
-     * Указатель ячейки для новой заявки.
-     */
-    private int position = 0;
 
     /**
      * Рандомное айли для айтема
@@ -31,7 +27,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items.add(this.position++, item);
+        this.items.add(item);
         return item;
     }
 
@@ -51,7 +47,7 @@ public class Tracker {
      */
      public Item findById(String id) {
             Item result = null;
-            for (int i = 0; i < position; i++) {
+            for (int i = 0; i < items.size(); i++) {
                 if (items.get(i).getId().equals(id)) {
                     result = items.get(i);
                     break;
@@ -68,8 +64,8 @@ public class Tracker {
     public boolean replace(String id, Item item) {
         boolean result = false;
         item.setId(id);
-        for (int index = 0; index != this.position; index++) {
-            if (this.items.get(index).getId().equals(id) && id != null) {
+        for (int index = 0; index != items.size(); index++) {
+            if (this.items.get(index).getId().equals(id)) {
                 this.items.set(index, item);
                 result = true;
                 break;
@@ -84,9 +80,8 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-        for (int index = 0; index != position; index++) {
+        for (int index = 0; index != items.size(); index++) {
             if (id != null && this.items.get(index).getId().equals(id)) {
-                position--;
                 this.items.remove(index);
                 result = true;
                 break;
@@ -100,26 +95,24 @@ public class Tracker {
      * @param name - имя заявки
      * @return
      */
-    public Item[] findByName(String name) {
-        Item[] result = new Item[position];
-        int resultPos = 0;
-        for (int i = 0; i < this.position; i++) {
-            if (name.equals(items.get(i).getName()) && this.items.get(i) != null) {
-                result[resultPos] = this.items.get(i);
-                resultPos++;
+    public List<Item> findByName(String name) {
+        List<Item> result = new ArrayList<>();
+        for (int i = 0; i < items.size(); i++) {
+            if (name.equals(items.get(i).getName())) {
+                result.add(this.items.get(i));
             }
         }
-        return Arrays.copyOf(result, resultPos);
+        return result;
     }
 
     /**
      * Выводит все заявки
      * @return массив заявок заполненных
      */
-    public Item[] getAll() {
-        Item[] result = new Item[position];
-        for (int index = 0; index != this.position; index++) {
-            result[index] = this.items.get(index);
+    public List<Item> getAll() {
+        List<Item> result = new ArrayList<>();
+        for (int index = 0; index != items.size(); index++) {
+            result.add(this.items.get(index));
         }
         return result;
     }
