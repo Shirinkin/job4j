@@ -5,6 +5,12 @@ import java.util.List;
 
 public class ConvertList2Array {
 
+    /**
+     * Метод преобразует лист в двумерный массив
+     * @param list
+     * @param rows
+     * @return
+     */
     public int[][] toArray(List<Integer> list, int rows) {
 
         int cells = (int) Math.ceil((float)list.size() / rows);
