@@ -142,7 +142,7 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             System.out.print("------------ Показаны все заявки --------------");
             for (Item item : tracker.getAll()) {
-                System.out.println(item.toString());
+                System.out.print(item.toString());
             }
         }
     }

@@ -60,7 +60,7 @@ public class StartUITest {
         Item item1 = tracker.getAll().get(0);
         assertThat(
                 new String(this.out.toByteArray()),
-                is(menu + "------------ Показаны все заявки --------------" + item1 + "\r\n"));
+                is(menu + "------------ Показаны все заявки --------------" + item1));
     }
 
     @Test
