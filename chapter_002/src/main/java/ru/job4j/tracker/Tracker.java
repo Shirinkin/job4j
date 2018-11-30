@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -11,7 +13,7 @@ public class Tracker {
     /**
      * Массив для хранение заявок.
      */
-    private final Item[] items = new Item[100];
+    private final List<Item> items = new ArrayList<>();
 
     /**
      * Указатель ячейки для новой заявки.
@@ -29,7 +31,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(this.position++,item);
         return item;
     }
 
@@ -50,8 +52,8 @@ public class Tracker {
      public Item findById(String id) {
             Item result = null;
             for (int i = 0; i < position; i++) {
-                if (items[i].getId().equals(id)) {
-                    result = items[i];
+                if (items.get(i).getId().equals(id)) {
+                    result = items.get(i);
                     break;
                 }
             }
@@ -67,8 +69,8 @@ public class Tracker {
         boolean result = false;
         item.setId(id);
         for (int index = 0; index != this.position; index++) {
-            if (this.items[index].getId().equals(id) && id != null) {
-                this.items[index] = item;
+            if (this.items.get(index).getId().equals(id) && id != null) {
+                this.items.set(index, item);
                 result = true;
                 break;
             }
@@ -83,9 +85,9 @@ public class Tracker {
     public boolean delete(String id) {
         boolean result = false;
         for (int index = 0; index != position; index++) {
-            if (id != null && this.items[index].getId().equals(id)) {
-               System.arraycopy(this.items, index + 1, this.items, index, this.items.length - index - 1);
+            if (id != null && this.items.get(index).getId().equals(id)) {
                 position--;
+                this.items.remove(index);
                 result = true;
                 break;
            }
@@ -102,8 +104,8 @@ public class Tracker {
         Item[] result = new Item[position];
         int resultPos = 0;
         for (int i = 0; i < this.position; i++) {
-            if (name.equals(items[i].getName()) && this.items[i] != null) {
-                result[resultPos] = this.items[i];
+            if (name.equals(items.get(i).getName()) && this.items.get(i) != null) {
+                result[resultPos] = this.items.get(i);
                 resultPos++;
             }
         }
@@ -117,7 +119,7 @@ public class Tracker {
     public Item[] getAll() {
         Item[] result = new Item[position];
         for (int index = 0; index != this.position; index++) {
-            result[index] = this.items[index];
+            result[index] = this.items.get(index);
         }
         return result;
     }

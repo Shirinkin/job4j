@@ -1,38 +1,41 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MenuTracker {
 
     private Input input;
     private Tracker tracker;
     private int position = 0;
-    private UserAction[] actions = new UserAction[8];
+    private List<UserAction> actions = new ArrayList<>();
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
 
-    public int[] getActionsId(){
-        int[] range = new int[7];
-        for (int index = 0; index != range.length; index++) {
-            range[index] = index;
+    public List<Integer> getActionsId() {
+        List<Integer> range = new ArrayList<>();
+        for (int index = 0; index != this.actions.size(); index++) {
+            range.add(this.actions.get(index).key());
         }
         return range;
     }
 
     public void fillActions() {
         System.out.println("Меню.");
-        this.actions[position++] = this.new AddItem(0,"Add new item");
-        this.actions[position++] = new MenuTracker.ShowItems(1,"Show all items");
-        this.actions[position++] = new EditItem(2,"Edit item");
-        this.actions[position++] = this.new DeleteItem(3,"Delete item");
-        this.actions[position++] = this.new FindItemByID(4,"Find item by Id");
-        this.actions[position++] = this.new FindItemByName(5,"Find items by name");
-        this.actions[position++] = this.new ExitProgram(6,"Exit Program");
+        this.actions.add(position++, this.new AddItem(0, "Add new item"));
+        this.actions.add(position++, new ShowItems(1, "Show all items"));
+        this.actions.add(position++, new EditItem(2, "Edit item"));
+        this.actions.add(position++, this.new DeleteItem(3, "Delete item"));
+        this.actions.add(position++, this.new FindItemByID(4, "Find item by Id"));
+        this.actions.add(position++, this.new FindItemByName(5, "Find items by name"));
+        this.actions.add(position++, this.new ExitProgram(6, "Exit Program"));
     }
 
     public void select(int key) {
-        this.actions[key].execute(this.input,tracker);
+        this.actions.get(key).execute(this.input, tracker);
     }
 
     public void show() {
@@ -45,8 +48,8 @@ public class MenuTracker {
 
     private class FindItemByID extends BaseAction {
 
-        public FindItemByID(int key,String name) {
-            super(key,name);
+        public FindItemByID(int key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -64,7 +67,7 @@ public class MenuTracker {
 
     private class AddItem extends BaseAction {
 
-        public AddItem(int key,String name) {
+        public AddItem(int key, String name) {
             super(key, name);
         }
 
@@ -83,7 +86,7 @@ public class MenuTracker {
     private class ExitProgram extends BaseAction {
 
         public ExitProgram(int key, String name) {
-            super(key,name);
+            super(key, name);
         }
 
 
@@ -159,7 +162,7 @@ class EditItem extends BaseAction {
         String id = input.ask("Введите id заявки :");
         String name = input.ask("Отредактируйте имя заявки :");
         String desc = input.ask("Отредактируйте описание заявки :");
-        tracker.replace(id,new Item(name, desc));
+        tracker.replace(id, new Item(name, desc));
         System.out.println("------------ заявка с getId : " + id + " успешно отредактирована" + "\n");
     }
 

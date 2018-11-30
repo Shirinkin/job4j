@@ -66,13 +66,13 @@ public class StartUI {
      */
     public void init() {
 
-        MenuTracker menu = new MenuTracker(this.input,tracker);
+        MenuTracker menu = new MenuTracker(this.input, tracker);
         menu.fillActions();
         do {
             menu.show();
             //int key = Integer.valueOf(this.input.ask("Select:"));
-            menu.select(input.ask("Select:", menu.getActionsId() ));
-        } while(!"y".equals(this.input.ask("Exit? (y)")));
+            menu.select(input.ask("Select:", menu.getActionsId()));
+        } while (!"y".equals(this.input.ask("Exit? (y)")));
         /*boolean exit = false;
         while (!exit) {
             this.showMenu();
@@ -115,8 +115,8 @@ public class StartUI {
     private void editItem() {
         System.out.println("------------ Редактирование заявки --------------");
         String id = this.input.ask("Введите id заявки :");
-        Item item = new Item(null,null);
-        if (this.tracker.replace(id,item)) {
+        Item item = new Item(null, null);
+        if (this.tracker.replace(id, item)) {
             String name = this.input.ask("Отредактируйте имя заявки :");
             String desc = this.input.ask("Отредактируйте описание заявки :");
             item = new Item(name, desc);
