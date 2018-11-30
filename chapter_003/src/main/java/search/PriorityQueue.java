@@ -11,19 +11,23 @@ public class PriorityQueue {
      * @param task
      */
     public void put(Task task) {
-        if (tasks.size() == 0) {
-            tasks.add(task);
-        } else {
-            for (int i = 0; i < tasks.size(); i++) {
-                if (tasks.get(i).getPriority() > task.getPriority()) {
-                    tasks.add(i,task);
-                    break;
-                }
-            }
-        }
+       int count = 0;
+       for (Task elem : this.tasks) {
+           if (elem.getPriority() > task.getPriority()) {
+               break;
+           }
+           count++;
+       }
+       tasks.add(count,task);
     }
 
     public Task take() {
         return this.tasks.poll();
+    }
+
+    public void getAll() {
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(tasks.get(i));
+        }
     }
 }
