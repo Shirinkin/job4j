@@ -7,7 +7,7 @@ public class User implements Comparable<User> {
     private Integer age;
     private String name;
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 

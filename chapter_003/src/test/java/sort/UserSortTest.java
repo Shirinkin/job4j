@@ -31,7 +31,7 @@ public class UserSortTest {
         UserSort sorted = new UserSort();
         List<User> tempList = new ArrayList<>();
         User user1 = new User(5, "Misha");
-        User user2 = new User(5, "Adel");
+        User user2 = new User(50, "Adel");
         User user3 = new User(1, "Adel");
         tempList.add(user1);
         tempList.add(user2);
@@ -41,4 +41,38 @@ public class UserSortTest {
         System.out.println(result);
         assertThat(result.iterator().next(), is(user3));
     }
+
+    @Test
+    public void WhenSortByNameLength() {
+        UserSort sorted = new UserSort();
+        List<User> tempList = new ArrayList<>();
+        User user1 = new User(5, "Misha");
+        User user2 = new User(5, "Adelinda");
+        User user3 = new User(1, "Adel");
+        tempList.add(user1);
+        tempList.add(user2);
+        tempList.add(user3);
+        System.out.println(tempList);
+        List<User> result = sorted.sortByNameLength(tempList);
+        System.out.println(result);
+        assertThat(result.iterator().next(), is(user3));
+    }
+
+    @Test
+    public void WhenSortByAllFields() {
+        UserSort sorted = new UserSort();
+        List<User> tempList = new ArrayList<>();
+        User user1 = new User(5, "Misha");
+        User user2 = new User(15, "Misha");
+        User user3 = new User(1, "Adel");
+        tempList.add(user1);
+        tempList.add(user2);
+        tempList.add(user3);
+        System.out.println(tempList);
+        List<User> result = sorted.sortByAllFields(tempList);
+        System.out.println(result);
+        assertThat(result.get(1), is(user1));
+    }
+
+
 }
