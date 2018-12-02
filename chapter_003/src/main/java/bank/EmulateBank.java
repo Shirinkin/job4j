@@ -82,8 +82,28 @@ public class EmulateBank {
 
     public boolean transferMoney(int srcPassport, int srcRequisite, int destPassport, int dstRequisite, double amount) {
         boolean result = false;
+        if (validTransfer(srcPassport, srcRequisite, destPassport, dstRequisite, amount)) {
+            for (Account account : getUsersAccounts(srcPassport)) {
+                if (account.getReqs() == srcRequisite) {
+                    account.setValue(account.getValue() - amount);
+                    break;
+                }
+            }
+            for (Account account : getUsersAccounts(destPassport)) {
+                if (account.getReqs() == dstRequisite) {
+                    account.setValue(account.getValue() + amount);
+                    break;
+                }
+            }
+            result = true;
+        }
+        return result;
+    }
+
+    public boolean validTransfer(int srcPassport, int srcRequisite, int destPassport, int dstRequisite, double amount) {
         User user1 = getUserByPassport(srcPassport);
         User user2 = getUserByPassport(destPassport);
+        boolean result = false;
         boolean rsAccount1 = false;
         boolean rsAccount2 = false;
         boolean transfer = false;
@@ -106,21 +126,10 @@ public class EmulateBank {
             }
         }
         if ((user1 != null) && (user2 != null) && rsAccount1 && rsAccount2 && transfer) {
-            for (Account account : getUsersAccounts(srcPassport)) {
-                if (account.getReqs() == srcRequisite) {
-                    account.setValue(account.getValue() - amount);
-                    break;
-                }
-            }
-            for (Account account : getUsersAccounts(destPassport)) {
-                if (account.getReqs() == dstRequisite) {
-                    account.setValue(account.getValue() + amount);
-                    break;
-                }
-            }
             result = true;
         }
         return result;
     }
 
 }
+
