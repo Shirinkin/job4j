@@ -1,5 +1,6 @@
 package bank;
 
+import javax.swing.text.html.ListView;
 import java.util.*;
 
 public class EmulateBank {
@@ -39,8 +40,8 @@ public class EmulateBank {
      * @param passport
      */
     public void deleteUser(int passport) {
-        usersAcc.keySet().remove(getUserByPassport(passport).get());
-
+        Optional<User> u = getUserByPassport(passport);
+        u.ifPresent(user -> usersAcc.keySet().remove(user));
     }
 
     /**
@@ -74,10 +75,22 @@ public class EmulateBank {
     public void deleteAccountFromUser(int passport, Account account) {
         Optional<User> user = getUserByPassport(passport);
         if (user.isPresent()) {
-            getUsersAccounts(passport).remove(account);
+            List<Account> userAccounts = getUsersAccounts(passport);
+            if (userAccounts != null) {
+                userAccounts.remove(account);
+            }
         }
     }
 
+    /**
+     * Перевод средств между счетами
+     * @param srcPassport
+     * @param srcRequisite
+     * @param destPassport
+     * @param dstRequisite
+     * @param amount
+     * @return
+     */
     public boolean transferMoney(int srcPassport, int srcRequisite, int destPassport, int dstRequisite, double amount) {
         boolean result = false;
         if (validTransfer(srcPassport, srcRequisite, destPassport, dstRequisite, amount)) {
@@ -98,6 +111,35 @@ public class EmulateBank {
         return result;
     }
 
+    /**
+     * Получение аккаунта по паспорту и реквизитам
+     * @param passport
+     * @param req
+     * @return
+     */
+    public Optional<Account> getAccount(int passport, int req) {
+        Optional<Account> account = Optional.empty();
+        List<Account> accounts = getUsersAccounts(passport);
+        if (accounts != null) {
+            for (Account ac : accounts) {
+                if (ac.getReqs() == req) {
+                    account = Optional.of(ac);
+                    break;
+                }
+            }
+        }
+        return account;
+    }
+
+    /**
+     * Проверка возможности перевода
+     * @param srcPassport
+     * @param srcRequisite
+     * @param destPassport
+     * @param dstRequisite
+     * @param amount
+     * @return
+     */
     public boolean validTransfer(int srcPassport, int srcRequisite, int destPassport, int dstRequisite, double amount) {
         Optional<User> user1 = getUserByPassport(srcPassport);
         Optional<User> user2 = getUserByPassport(destPassport);
@@ -105,17 +147,11 @@ public class EmulateBank {
         boolean rsAccount1 = false;
         boolean rsAccount2 = false;
         boolean transfer = false;
-        for (int index = 0; index != getUsersAccounts(srcPassport).size(); index++) {
-            if (getUsersAccounts(srcPassport).get(index).getReqs() == srcRequisite) {
-                rsAccount1 = true;
-                break;
-            }
+        if (getAccount(srcPassport, srcRequisite).isPresent()) {
+            rsAccount1 = true;
         }
-        for (int index = 0; index != getUsersAccounts(destPassport).size(); index++) {
-            if (getUsersAccounts(destPassport).get(index).getReqs() == dstRequisite) {
-                rsAccount2 = true;
-                break;
-            }
+        if (getAccount(destPassport, dstRequisite).isPresent()) {
+            rsAccount2 = true;
         }
         for (Account account : getUsersAccounts(srcPassport)) {
             if (account.getReqs() == srcRequisite && account.getValue() > amount) {
