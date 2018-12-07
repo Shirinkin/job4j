@@ -34,6 +34,16 @@ public class Account {
     public Account() {
     }
 
+    public boolean transfer(double amount, Account dest) {
+        boolean result = false;
+        if (this.getValue() >= amount) {
+            this.value = this.value - amount;
+            dest.setValue(dest.getValue() + amount);
+            result = true;
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
         return "Account{"

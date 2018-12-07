@@ -141,26 +141,11 @@ public class EmulateBank {
      * @return
      */
     public boolean validTransfer(int srcPassport, int srcRequisite, int destPassport, int dstRequisite, double amount) {
-        Optional<User> user1 = getUserByPassport(srcPassport);
-        Optional<User> user2 = getUserByPassport(destPassport);
         boolean result = false;
-        boolean rsAccount1 = false;
-        boolean rsAccount2 = false;
-        boolean transfer = false;
-        if (getAccount(srcPassport, srcRequisite).isPresent()) {
-            rsAccount1 = true;
-        }
-        if (getAccount(destPassport, dstRequisite).isPresent()) {
-            rsAccount2 = true;
-        }
-        for (Account account : getUsersAccounts(srcPassport)) {
-            if (account.getReqs() == srcRequisite && account.getValue() > amount) {
-                transfer = true;
-                break;
-            }
-        }
-        if ((user1.isPresent()) && (user2.isPresent()) && rsAccount1 && rsAccount2 && transfer) {
-            result = true;
+        Optional<Account> srcAccount = getAccount(srcPassport, srcRequisite);
+        Optional<Account> destAccount = getAccount(destPassport, dstRequisite);
+        if (srcAccount.isPresent() && destAccount.isPresent()) {
+            result = srcAccount.get().transfer(amount, destAccount.get());
         }
         return result;
     }
