@@ -71,7 +71,7 @@ public class StartUI {
         MenuTracker menu = new MenuTracker(this.input, tracker);
         menu.fillActions();
         do {
-            menu.show();
+            menu.show(System.out::println);
             //int key = Integer.valueOf(this.input.ask("Select:"));
             menu.select(input.ask("Select:", menu.getActionsId()));
         } while (!"y".equals(this.input.ask("Exit? (y)")));
