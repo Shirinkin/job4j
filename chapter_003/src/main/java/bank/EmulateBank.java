@@ -1,9 +1,6 @@
 package bank;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class EmulateBank {
 
@@ -18,11 +15,7 @@ public class EmulateBank {
      * @param user
      */
     public void addUser(User user) {
-        try {
             usersAcc.putIfAbsent(user, new ArrayList<Account>());
-        } catch (Exception e) {
-            System.out.println("This User Already Exist!");
-        }
     }
 
     /**
@@ -30,15 +23,15 @@ public class EmulateBank {
      * @param passport
      * @return
      */
-    public User getUserByPassport(int passport) {
-        User userDest = new User();
-        for (User user : usersAcc.keySet()) {
-            if (user.getPassport() == passport) {
-                userDest = user;
+    public Optional<User> getUserByPassport(int passport) {
+        Optional<User> user = Optional.empty();
+        for (User u : usersAcc.keySet()) {
+            if (u.getPassport() == passport) {
+                user = Optional.of(u);
                 break;
             }
         }
-        return userDest;
+        return user;
     }
 
     /**
@@ -46,7 +39,8 @@ public class EmulateBank {
      * @param passport
      */
     public void deleteUser(int passport) {
-        usersAcc.keySet().remove(getUserByPassport(passport));
+        usersAcc.keySet().remove(getUserByPassport(passport).get());
+
     }
 
     /**
@@ -55,8 +49,10 @@ public class EmulateBank {
      * @param account
      */
     public void addAccountToUser(int passport, Account account) {
-        User user = getUserByPassport(passport);
-        usersAcc.get(user).add(account);
+        Optional<User> user = getUserByPassport(passport);
+        if (user.isPresent()) {
+            usersAcc.get(user.get()).add(account);
+        }
     }
 
 
@@ -66,8 +62,8 @@ public class EmulateBank {
      * @return
      */
     public List<Account> getUsersAccounts(int passport) {
-        User user = getUserByPassport(passport);
-        return usersAcc.get(user);
+        Optional<User> user = getUserByPassport(passport);
+        return user.map(user1 -> usersAcc.get(user1)).orElse(null);
     }
 
     /**
@@ -76,8 +72,10 @@ public class EmulateBank {
      * @param account
      */
     public void deleteAccountFromUser(int passport, Account account) {
-        User user = getUserByPassport(passport);
-        usersAcc.get(user).remove(account);
+        Optional<User> user = getUserByPassport(passport);
+        if (user.isPresent()) {
+            getUsersAccounts(passport).remove(account);
+        }
     }
 
     public boolean transferMoney(int srcPassport, int srcRequisite, int destPassport, int dstRequisite, double amount) {
@@ -101,8 +99,8 @@ public class EmulateBank {
     }
 
     public boolean validTransfer(int srcPassport, int srcRequisite, int destPassport, int dstRequisite, double amount) {
-        User user1 = getUserByPassport(srcPassport);
-        User user2 = getUserByPassport(destPassport);
+        Optional<User> user1 = getUserByPassport(srcPassport);
+        Optional<User> user2 = getUserByPassport(destPassport);
         boolean result = false;
         boolean rsAccount1 = false;
         boolean rsAccount2 = false;
@@ -125,7 +123,7 @@ public class EmulateBank {
                 break;
             }
         }
-        if ((user1 != null) && (user2 != null) && rsAccount1 && rsAccount2 && transfer) {
+        if ((user1.isPresent()) && (user2.isPresent()) && rsAccount1 && rsAccount2 && transfer) {
             result = true;
         }
         return result;

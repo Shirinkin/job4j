@@ -11,7 +11,7 @@ public class EmulateBankTest {
     public void whenAddUser() {
         EmulateBank bank = new EmulateBank();
         bank.addUser(new User("Misha", 458));
-        assertThat(bank.getUserByPassport(458).getName(), is("Misha"));
+        assertThat(bank.getUserByPassport(458).get().getName(), is("Misha"));
     }
 
     @Test
