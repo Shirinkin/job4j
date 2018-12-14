@@ -11,13 +11,7 @@ public class PriorityQueue {
      * @param task
      */
     public void put(Task task) {
-       int count = 0;
-       for (Task elem : this.tasks) {
-           if (elem.getPriority() > task.getPriority()) {
-               break;
-           }
-           count++;
-       }
+       int count = (int) tasks.stream().filter(element -> element.getPriority() < task.getPriority()).count();
        tasks.add(count, task);
     }
 
