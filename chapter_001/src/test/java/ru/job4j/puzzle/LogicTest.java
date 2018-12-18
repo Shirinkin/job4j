@@ -2,7 +2,7 @@ import org.junit.Test;
 import ru.job4j.puzzle.Logic;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class LogicTest {
 

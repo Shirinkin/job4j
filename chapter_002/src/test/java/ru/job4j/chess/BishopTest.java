@@ -1,7 +1,6 @@
 package ru.job4j.chess;
 
 import org.junit.Test;
-import ru.job4j.chess.*;
 import ru.job4j.chess.exceptions.FigureNotFoundException;
 import ru.job4j.chess.exceptions.ImposiibleMoveException;
 import ru.job4j.chess.exceptions.OcuupiedWayException;
@@ -9,7 +8,7 @@ import ru.job4j.chess.figures.Bishop;
 import ru.job4j.chess.figures.Cell;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class BishopTest {
 
