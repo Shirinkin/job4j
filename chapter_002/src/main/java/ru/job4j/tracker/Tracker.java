@@ -47,7 +47,7 @@ public class Tracker {
      */
      public Item findById(String id) {
             return this.items.stream()
-                    .filter(item -> item.getId().contains(id))
+                    .filter(item -> item.getId().equals(id))
                     .findFirst().orElse(null);
         }
 
