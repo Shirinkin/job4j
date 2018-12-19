@@ -6,6 +6,9 @@ import ru.job4j.chess.exceptions.OcuupiedWayException;
 import ru.job4j.chess.figures.Cell;
 import ru.job4j.chess.figures.Figure;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Class Board
  * @author Mikhail
@@ -40,20 +43,23 @@ public class Board {
     }
 
     private int findBy(Cell cell) {
-        int rst = -1;
-        for (int index = 0; index != this.figures.length; index++) {
-            if (this.figures[index] != null && this.figures[index].position.equals(cell)) {
-                rst = index;
-                break;
-            }
+        final int[] result = {-1};
+        List<Figure> figureList = Arrays.asList(this.figures);
+        figureList.stream().forEach(
+                figure -> {
+                    if (figure != null && figure.position.equals(cell)) {
+                        result[0] = figureList.indexOf(figure);
+                    }
+                }
+        );
+        if (result[0] == -1) {
+            throw new FigureNotFoundException("not found");
         }
-        return rst;
+        return result[0];
     }
 
     public void clean() {
-        for (int position = 0; position != this.figures.length; position++) {
-            this.figures[position] = null;
-        }
+        Arrays.stream(this.figures).forEach(element -> element = null);
         this.index = 0;
     }
 }
