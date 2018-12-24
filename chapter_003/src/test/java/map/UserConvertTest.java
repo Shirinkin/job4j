@@ -15,13 +15,13 @@ public class UserConvertTest {
     @Test
     public void whenConvert() {
         UserConvert convert = new UserConvert();
-        List<User> result = new ArrayList<>();
-        User user1 = new User("tem", 1, "erterterte");
-        result.add(new User("sdf", 5, "234"));
-        result.add(user1);
-        result.add(new User("Misha", 15, "SPB"));
+        List<User> result = List.of(
+                new User("tem", 1, "erterterte"),
+                new User("sdf", 5, "234"),
+                new User("Misha", 15, "SPB")
+        );
         HashMap<Integer, User> temp = convert.process(result);
-        assertThat(temp.get(1), is(user1));
+        assertThat(temp.get(1).getName(), is("tem"));
 
     }
 }
