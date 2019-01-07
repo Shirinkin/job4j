@@ -20,7 +20,7 @@ public class UserSortTest {
                 new User(1, "Adel")
         );
         Set<User> result = sorted.sort(tempList);
-        assertThat(result.iterator().next().getName(), is("Misha"));
+        assertThat(result.iterator().next().getName(), is("Adel"));
     }
 
     @Test

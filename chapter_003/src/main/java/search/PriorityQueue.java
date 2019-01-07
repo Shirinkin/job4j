@@ -20,7 +20,7 @@ public class PriorityQueue {
     }
 
     public void getAll() {
-        for (int i = 0; i < tasks.size(); i++) {
+        for (var i = 0; i < tasks.size(); i++) {
             System.out.println(tasks.get(i));
         }
     }
